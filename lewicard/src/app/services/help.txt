@@ -1,0 +1,24 @@
+
+
+
+
+
+  show: boolean;
+   component = AddWordsComponent;
+   words: any;
+   constructor(private service: ServicesService) {
+     this.show = true;
+     this.words = [];
+   }
+
+   ngOnInit() {
+     // this.words = localStorage.getItem('saveItems');
+     // console.log(this.words);
+      const words = this.service.getWords();
+     console.log(words);
+   }
+   showed(isShow){
+     if (isShow === false){
+       this.show = true;
+     }
+   }

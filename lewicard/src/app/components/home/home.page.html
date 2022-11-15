@@ -1,0 +1,54 @@
+
+  <ion-content class="ion-padding">
+    <ion-header  [translucent]="true" >
+      <ion-toolbar>
+        <ion-title >
+          Welcome to LeWiCard
+        </ion-title>
+      </ion-toolbar>
+    </ion-header>
+      <ion-slides  pager="true" [options]="slideOpts" >
+        <ion-slide  *ngFor="let word of words" >
+          <ion-card  [color]="cardColor" (click)="showTraduction(traduction)" >
+            <ion-card-content >
+              <ion-label  *ngIf="traduction=== true" class="ion-text-center labelWord">{{word.englishWord | uppercase}}</ion-label>
+              <ion-label  *ngIf="traduction=== false" class="ion-text-center labelWord">{{word.translation| uppercase}}</ion-label>
+            </ion-card-content>
+          </ion-card>
+        </ion-slide>
+      </ion-slides>
+    <ion-slides *ngIf="traduction=== false"  pager="true" [options]="slideOpts" >
+      <ion-slide  *ngFor="let word of words" >
+
+      </ion-slide>
+    </ion-slides>
+
+<!--   <div (click)="showTraduction(false)">-->
+<!--     <ion-card *ngIf="traduction === false"   color="danger">-->
+<!--       <ion-card-header>-->
+<!--         <ion-card-title>TRANSLATE</ion-card-title>-->
+<!--       </ion-card-header>-->
+<!--       <ion-card-content>-->
+<!--         <ion-slides  pager="true" [options]="slideOpts" >-->
+<!--           <ion-slide *ngFor="let word of words">-->
+<!--             {{word.translation}}-->
+<!--           </ion-slide>-->
+<!--         </ion-slides>-->
+<!--       </ion-card-content>-->
+<!--     </ion-card>-->
+<!--   </div>-->
+  </ion-content>
+
+  <ion-toolbar>
+    <ion-tabs>
+      <ion-tab-bar slot="bottom">
+        <ion-tab-button (click)="showed(false)">
+          <ion-icon name="add"></ion-icon>
+          <ion-label class="addWords">Add Words</ion-label>
+        </ion-tab-button>
+      </ion-tab-bar>
+    </ion-tabs>
+  </ion-toolbar>
+
+
+

@@ -1,0 +1,7 @@
+{
+  "name": "lewicard",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
