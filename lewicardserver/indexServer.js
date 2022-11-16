@@ -24,7 +24,6 @@ var router = require("express").Router();
 // Create a new Tutorial
 var word = require('./models/modelController')
 
-
 const mongoose = require("mongoose");
 const url = require('./database/db.config').url;
 const Word = require('./models/model')
