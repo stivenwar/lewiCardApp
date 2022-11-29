@@ -25,9 +25,10 @@ export class AddWordsPage implements OnInit {
     this.translation = '';
   }
   ngOnInit() {
-    if (localStorage.getItem('saveItems')){
-      this.words = JSON.parse(localStorage.getItem('saveItems'));
-    }
+    // if (localStorage.getItem('saveItems')){
+    //   this.words = JSON.parse(localStorage.getItem('saveItems'));
+    // }
+    this.getAllWords();
   }
   onSave() {
     const wordCreate = new Word();
@@ -35,6 +36,7 @@ export class AddWordsPage implements OnInit {
     if (this.word !== '' && this.translation !== '' && this.word !== ' ' && this.translation !== ' '  ){
       wordCreate.englishWord = this.word;
       wordCreate.translation = this.translation;
+      console.log(wordCreate);
       this.service.create(wordCreate).subscribe((e) => {
         console.log(e);
       });
@@ -62,13 +64,26 @@ export class AddWordsPage implements OnInit {
        console.log(error);
      });
   }
+  getAllWords(){
+    this.service.getAll().subscribe(e => {
+      this.words = e;
+    });
+  }
+  removeElement(i: any) {
+    this.service.delete(i).subscribe( result => {
+      console.log(result);
 
-  removeElement(i: number) {
+    },error => {
+      console.log(error);
+    },() =>{
+      console.log('eliminado correctamente');
+    });
+    this.getAllWords();
 
-    this.words.splice(i, 1);
-    console.log(this.words);
-    this.item = JSON.stringify(this.words);
-    localStorage.setItem('saveItems',this.item);
+    // this.words.splice(i, 1);
+    // console.log(this.words);
+    // this.item = JSON.stringify(this.words);
+    // localStorage.setItem('saveItems',this.item);
   }
   async presentAlert(h: string, sb: string, msg: string) {
     const alert = await this.alert.create({

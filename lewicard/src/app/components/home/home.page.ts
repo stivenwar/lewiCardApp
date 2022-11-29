@@ -2,14 +2,14 @@ import {Component, OnInit} from '@angular/core';
 import {AddWordsPage} from '../../pages/add-words/add-words.page';
 import {ServicesService} from '../../services/services.service';
 import {ModalController, NavController} from '@ionic/angular';
-import {Router} from '@angular/router';
+
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage{
+export class HomePage implements OnInit{
   show: boolean;
   words: any;
   traduction: boolean;
@@ -20,11 +20,20 @@ export class HomePage{
   cardColor: any;
   constructor(private service: ServicesService,private modalCtrl: ModalController,public navCtrl: NavController) {
     this.show = true;
-    this.words = JSON.parse(localStorage.getItem('saveItems'));
+    // this.words = JSON.parse(localStorage.getItem('saveItems'));
     this.traduction = true;
     this.cardColor = 'secondary';
   }
 
+  ngOnInit(){
+        this.getAllWords();
+    }
+  getAllWords(){
+    this.service.getAll().subscribe(e => {
+      this.words = e;
+    });
+
+  }
   async showed(isShow){
     if (isShow === false){
       this.show = true;
@@ -36,7 +45,7 @@ export class HomePage{
     console.log(data);
     console.log(role);
     if (role === 'confirm') {
-      this.words = data;
+      this.getAllWords();
     }
   }
 

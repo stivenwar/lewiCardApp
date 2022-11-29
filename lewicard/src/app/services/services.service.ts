@@ -8,12 +8,12 @@ import {Word} from '../interface/claseWord';
 })
 export class ServicesService {
 
-  baseUrl = 'http://localhost:3000';
+  baseUrl = 'http://localhost:3000/api/';
   words: Observable<any>;
   constructor(private http: HttpClient) {
   }
   getAll(): Observable<Word[]> {
-    return this.http.get<Word[]>(this.baseUrl);
+    return this.http.get<Word[]>(this.baseUrl+'data');
   }
 
   get(id: any): Observable<Word> {
@@ -21,7 +21,8 @@ export class ServicesService {
   }
 
   create(data: any): Observable<any> {
-    return this.http.post(this.baseUrl, data);
+    console.log(this.baseUrl, data);
+    return this.http.post(this.baseUrl+'create/', data);
   }
 
   update(id: any, data: any): Observable<any> {
@@ -29,7 +30,7 @@ export class ServicesService {
   }
 
   delete(id: any): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/${id}`);
+    return this.http.delete(`${this.baseUrl+'delete'}/${id}`);
   }
 
   deleteAll(): Observable<any> {
