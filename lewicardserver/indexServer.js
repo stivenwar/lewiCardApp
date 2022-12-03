@@ -73,6 +73,6 @@ app.delete('/api/delete/:id',(req,res) => {
         console.log(error);
     })
 })
-app.listen(3000, function () {
+app.listen(process.env.PORT ||3000, function () {
     console.log("Node server running on http://localhost:3000");
 });
